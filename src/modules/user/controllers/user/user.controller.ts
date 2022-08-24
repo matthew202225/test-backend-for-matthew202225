@@ -1,14 +1,14 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-// import { AuthGuard } from '@src/guard/auth/auth.guard';
 import { ApiAuth } from '@src/decorators/api.auth';
+import { ResDefaultVo } from '@src/vo/resDefault.vo';
 import { UserService } from '../../services/user/user.service';
 import { CreateUserDto } from './dto/create.user.dto';
 import { DeleteUserDto } from './dto/delete.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
 import { UserVo } from './vo/user.vo';
 import { UserDetailVo } from './vo/userDetail.vo';
-// import { AddExpUserDto } from '@src/modules/admin/system/user/controllers/user/dto/addexp.user.dto';
+import { UserListlVo } from './vo/userList.vo';
 
 @ApiTags('用户管理')
 @ApiBearerAuth()
@@ -21,6 +21,10 @@ export class UserController {
   @ApiOperation({ summary: 'Create User', description: 'Create User' })
   @Post('create')
   @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({
+    type: UserDetailVo,
+    description: 'User Detail',
+  })
   async createUser(@Body() createUserDto: CreateUserDto): Promise<UserVo> {
     return this.userService.createUser(createUserDto);
   }
@@ -28,6 +32,7 @@ export class UserController {
   @ApiOperation({ summary: 'Update User', description: 'Update User' })
   @Post('update')
   @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({ type: ResDefaultVo })
   async updateUser(@Body() updateUserDto: UpdateUserDto): Promise<void> {
     return this.userService.updateUser(updateUserDto);
   }
@@ -35,6 +40,7 @@ export class UserController {
   @ApiOperation({ summary: 'Delete User', description: 'Delete User' })
   @Post('delete')
   @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({ type: ResDefaultVo })
   async deleteUser(@Body() deleteUserDto: DeleteUserDto): Promise<void> {
     return this.userService.deleteUser(deleteUserDto);
   }
@@ -52,7 +58,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Get User List', description: 'Get User List' })
   @ApiOkResponse({
-    type: UserDetailVo,
+    type: UserListlVo,
     description: 'User List',
   })
   @Get('list')
@@ -60,15 +66,4 @@ export class UserController {
   async getUserList(): Promise<UserVo[]> {
     return this.userService.getUserList();
   }
-
-  // @ApiOperation({ summary: '查询用户', description: '查询用户' })
-  // @ApiOkResponse({
-  //   type: UserEntity,
-  //   description: '查询用户',
-  // })
-  // @Get('query/:address')
-  // @HttpCode(HttpStatus.CREATED)
-  // async queryUser(@Param('address') address: string): Promise<UserEntity | undefined> {
-  //   return this.UserService.queryUser(address);
-  // }
 }

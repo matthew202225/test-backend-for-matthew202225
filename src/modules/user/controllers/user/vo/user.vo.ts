@@ -10,7 +10,7 @@ export class UserVo extends QueryVo {
   @ApiProperty({ description: 'user created date' })
   address: Date;
 
-  @ApiProperty({ description: 'user updated date' })
+  @ApiProperty({ required: false, description: 'user updated date' })
   @IsOptional()
   description?: Date;
 }

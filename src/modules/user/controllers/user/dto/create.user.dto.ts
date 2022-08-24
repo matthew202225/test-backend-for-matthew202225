@@ -12,7 +12,7 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'user address is empty' })
   readonly address: string;
 
-  @ApiPropertyOptional({ required: true, description: 'user description' })
+  @ApiPropertyOptional({ description: 'user description' })
   @MaxLength(128, { message: 'user description max length is 128' })
   readonly description: string;
 }
