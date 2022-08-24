@@ -4,8 +4,6 @@ import moment from 'moment';
  * @param isDue 是否显示时分秒
  * @return:
  * @Description: 格式化日期
- * @Author: 水痕
- * @LastEditors: 水痕
  * @Date: 2019-07-31 15:27:39
  */
 export const formatDate = (dateNum: string | number, isDue = false): string => {
@@ -17,9 +15,7 @@ export const formatDate = (dateNum: string | number, isDue = false): string => {
 };
 
 /**
- * @Author: 水痕
  * @Date: 2020-02-20 20:51:54
- * @LastEditors: 水痕
  * @Description: 获取年月日时间
  * @param {type}
  * @return:
@@ -29,9 +25,7 @@ export const getDay = (date: Date = new Date()): string => {
 };
 
 /**
- * @Author: 水痕
  * @Date: 2020-02-20 21:47:49
- * @LastEditors: 水痕
  * @Description: 获取当前的时间鹾
  * @param {type}
  * @return:
@@ -54,9 +48,7 @@ export const birthdayYear = (date: Date): string | null => {
 };
 
 /**
- * @Author: 水痕
  * @Date: 2020-12-15 14:36:48
- * @LastEditors: 水痕
  * @Description: 传递时间距离现在多少毫秒过期
  * @param {string} date 时间格式为:2020-12-15 14:20:10
  * @return {*}

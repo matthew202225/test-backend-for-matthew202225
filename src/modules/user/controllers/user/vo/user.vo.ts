@@ -1,12 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { QueryVo } from '@src/vo/query.vo';
 
-export class QueryVo {
+import { IsOptional } from 'class-validator';
+
+export class UserVo extends QueryVo {
   @ApiProperty({ description: 'key id' })
-  id?: number;
+  name: number;
 
   @ApiProperty({ description: 'user created date' })
-  createdAt?: Date;
+  address: Date;
 
   @ApiProperty({ description: 'user updated date' })
-  updatedAt?: Date;
+  @IsOptional()
+  description?: Date;
 }

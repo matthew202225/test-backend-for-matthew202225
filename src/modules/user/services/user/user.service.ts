@@ -3,6 +3,8 @@ import { CreateUserDto } from '../../controllers/user/dto/create.user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
+import { UpdateUserDto } from '../../controllers/user/dto/update.user.dto';
+import { DeleteUserDto } from '../../controllers/user/dto/delete.user.dto';
 
 @Injectable()
 export class UserService {
@@ -17,19 +19,41 @@ export class UserService {
    * @return {*}
    */
   async createUser(createUserDto: CreateUserDto): Promise<any> {
-    console.log(createUserDto, this.userRepository)
-    // const { address } = createUserDto;
-    // const user: Pick<UserEntity, 'id'> | undefined = await this.userRepository.findOne({
-    //   where: { address },
-    //   select: ['id'],
-    // });
-    // if (user) {
-    //   await this.userRepository.update(user.id, createUserDto);
-    // } else {
-    //   const userRes = this.userRepository.create(createUserDto);
-    //   userRes.exp = 100;
-    //   console.log(userRes);
-    //   return await this.userRepository.save(userRes);
-    // }
+    console.log(createUserDto, this.userRepository);
+  }
+
+  /**
+   * @Description: 修改用户
+   * @param {CreateUserDto} createUserDto
+   * @return {*}
+   */
+  async updateUser(updateUserDto: UpdateUserDto): Promise<any> {
+    console.log(updateUserDto, this.userRepository);
+  }
+
+  /**
+   * @Description: 删除用户
+   * @param {CreateUserDto} createUserDto
+   * @return {*}
+   */
+  async deleteUser(deleteUserDto: DeleteUserDto): Promise<any> {
+    console.log(deleteUserDto, this.userRepository);
+  }
+
+  /**
+   * @Description: 用户详情
+   * @param {CreateUserDto} createUserDto
+   * @return {*}
+   */
+  async getUserDetail(id: string): Promise<any> {
+    console.log(id, this.userRepository);
+  }
+  /**
+   * @Description: 用户详情
+   * @param {CreateUserDto} createUserDto
+   * @return {*}
+   */
+  async getUserList(): Promise<any> {
+    console.log(this.userRepository);
   }
 }
