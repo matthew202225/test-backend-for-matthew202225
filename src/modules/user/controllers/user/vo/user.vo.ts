@@ -5,12 +5,12 @@ import { IsOptional } from 'class-validator';
 
 export class UserVo extends QueryVo {
   @ApiProperty({ description: 'key id' })
-  name: number;
+  name: string;
 
   @ApiProperty({ description: 'user created date' })
-  address: Date;
+  address: string;
 
   @ApiProperty({ required: false, description: 'user updated date' })
   @IsOptional()
-  description?: Date;
+  description?: string;
 }
