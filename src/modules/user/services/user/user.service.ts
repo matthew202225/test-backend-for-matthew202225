@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../../controllers/user/dto/create.user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../entities/user.entity';
@@ -14,46 +14,68 @@ export class UserService {
   ) {}
 
   /**
-   * @Description: 创建用户
+   * create user
+   *
    * @param {CreateUserDto} createUserDto
-   * @return {*}
+   * @return {*}  {Promise<UserEntity>}
+   * @memberof UserService
    */
-  async createUser(createUserDto: CreateUserDto): Promise<any> {
-    console.log(createUserDto, this.userRepository);
+  async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
+    const { name } = createUserDto;
+    const res = await this.userRepository.findOne({ where: { name } });
+    if (res) {
+      throw new HttpException(`user name ${name} already exist`, HttpStatus.OK);
+    }
+    return this.userRepository.save(createUserDto);
   }
 
   /**
-   * @Description: 修改用户
-   * @param {CreateUserDto} createUserDto
-   * @return {*}
+   * update user
+   *
+   * @param {UpdateUserDto} { id, address, description }
+   * @return {*}  {Promise<void>}
+   * @memberof UserService
    */
-  async updateUser(updateUserDto: UpdateUserDto): Promise<any> {
-    console.log(updateUserDto, this.userRepository);
+  async updateUser({ id, address, description }: UpdateUserDto): Promise<void> {
+    await this.userRepository.update(id, {
+      address,
+      description,
+    });
   }
 
   /**
-   * @Description: 删除用户
-   * @param {CreateUserDto} createUserDto
-   * @return {*}
+   * delete user
+   *
+   * @param {DeleteUserDto} { id }
+   * @return {*}  {Promise<any>}
+   * @memberof UserService
    */
-  async deleteUser(deleteUserDto: DeleteUserDto): Promise<any> {
-    console.log(deleteUserDto, this.userRepository);
+  async deleteUser({ id }: DeleteUserDto): Promise<any> {
+    await this.userRepository.delete(id);
   }
 
   /**
-   * @Description: 用户详情
-   * @param {CreateUserDto} createUserDto
-   * @return {*}
+   * get user detail
+   *
+   * @param {string} id
+   * @return {*}  {Promise<UserEntity>}
+   * @memberof UserService
    */
-  async getUserDetail(id: string): Promise<any> {
-    console.log(id, this.userRepository);
+  async getUserDetail(id: string): Promise<UserEntity> {
+    const res = await this.userRepository.findOne({ where: { id } });
+    if (res === undefined) {
+      throw new HttpException(`did not find user by id ${id}`, HttpStatus.OK);
+    }
+    return res;
   }
+
   /**
-   * @Description: 用户详情
-   * @param {CreateUserDto} createUserDto
-   * @return {*}
+   * get user list
+   *
+   * @return {*}  {Promise<UserEntity[]>}
+   * @memberof UserService
    */
-  async getUserList(): Promise<any> {
-    console.log(this.userRepository);
+  async getUserList(): Promise<UserEntity[]> {
+    return this.userRepository.find({ order: { createdAt: 'DESC' } });
   }
 }

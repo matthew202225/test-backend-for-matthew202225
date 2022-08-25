@@ -10,7 +10,7 @@ import { UserVo } from './vo/user.vo';
 import { UserDetailVo } from './vo/detail.user.vo';
 import { UserListlVo } from './vo/list.user.vo';
 
-@ApiTags('用户管理')
+@ApiTags('User Manage')
 @ApiBearerAuth()
 // @UseGuards(AuthGuard)
 @ApiAuth()
