@@ -6,18 +6,16 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class SharedEntity extends BaseEntity {
-  @ApiPropertyOptional({ description: 'id' })
+  @Transform((row: TransformFnParams) => row.value.toString())
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'id',
     comment: '主键id',
   })
-  id: number;
+  id: string;
 
-  @ApiPropertyOptional({ description: '创建时间' })
   @Transform((row: TransformFnParams) => +new Date(row.value))
   @CreateDateColumn({
     type: 'timestamp',
@@ -27,7 +25,6 @@ export class SharedEntity extends BaseEntity {
   })
   createdAt: Date;
 
-  @ApiPropertyOptional({ description: '更新时间' })
   @Transform((row: TransformFnParams) => +new Date(row.value))
   @UpdateDateColumn({
     type: 'timestamp',

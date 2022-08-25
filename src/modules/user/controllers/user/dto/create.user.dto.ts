@@ -15,5 +15,5 @@ export class CreateUserDto {
 
   @ApiPropertyOptional({ description: 'user description' })
   @MaxLength(128, { message: 'user description max length is 128' })
-  readonly description: string;
+  readonly description?: string;
 }
