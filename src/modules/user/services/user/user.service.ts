@@ -50,7 +50,7 @@ export class UserService {
    * @return {*}  {Promise<any>}
    * @memberof UserService
    */
-  async deleteUser({ id }: DeleteUserDto): Promise<any> {
+  async deleteUser({ id }: DeleteUserDto): Promise<void> {
     await this.userRepository.delete(id);
   }
 
