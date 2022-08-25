@@ -1,15 +1,10 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEmpty, IsNotEmpty, MaxLength } from 'class-validator';
+import { IsNotEmpty, MaxLength } from 'class-validator';
 
 export class UpdateUserDto {
   @ApiPropertyOptional({ required: true, description: 'user id' })
-  @IsEmpty({ message: 'user name is empty' })
+  @IsNotEmpty({ message: 'user id is empty' })
   readonly id: string;
-
-  @ApiPropertyOptional({ required: true, description: 'user name' })
-  @MaxLength(128, { message: 'user name max length is 128' })
-  @IsEmpty({ message: 'user name is empty' })
-  readonly name: string;
 
   @ApiPropertyOptional({ required: true, description: 'user address' })
   @MaxLength(128, { message: 'user address max length is 128' })

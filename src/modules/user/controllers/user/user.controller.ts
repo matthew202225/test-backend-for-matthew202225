@@ -7,8 +7,8 @@ import { CreateUserDto } from './dto/create.user.dto';
 import { DeleteUserDto } from './dto/delete.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
 import { UserVo } from './vo/user.vo';
-import { UserDetailVo } from './vo/userDetail.vo';
-import { UserListlVo } from './vo/userList.vo';
+import { UserDetailVo } from './vo/detail.user.vo';
+import { UserListlVo } from './vo/list.user.vo';
 
 @ApiTags('用户管理')
 @ApiBearerAuth()
